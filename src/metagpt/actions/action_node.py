@@ -38,55 +38,56 @@ class ReviseMode(Enum):
 
 TAG = "CONTENT"
 
-LANGUAGE_CONSTRAINT = "Language: Please use the same language as Human INPUT."
-FORMAT_CONSTRAINT = f"Format: output wrapped inside [{TAG}][/{TAG}] like format example, nothing else."
+LANGUAGE_CONSTRAINT = "日本語を使用してください"
+FORMAT_CONSTRAINT = f"出力フォーマット: 出力結果は [{TAG}][/{TAG}] で囲んでください"
 
 SIMPLE_TEMPLATE = """
-## context
+## コンテキスト
 {context}
 
 -----
 
-## format example
+## 出力フォーマット
 {example}
 
-## nodes: "<node>: <type>  # <instruction>"
+## 命令
 {instruction}
 
-## constraint
+## 制約
 {constraint}
 
-## action
-Follow instructions of nodes, generate output and make sure it follows the format example.
+## アクション
+「入力」の指示に従い「出力フォーマット」に従っているか確認してください。
 """
 
 REVIEW_TEMPLATE = """
-## context
-Compare the key's value of nodes_output and the corresponding requirements one by one. If a key's value that does not match the requirement is found, provide the comment content on how to modify it. No output is required for matching keys.
+## コンテキスト
+「入力node」と対応する要件を比較する。
+要件に合わない値が見つかった場合、修正方法を考える。
 
-### nodes_output
+### 入力node
 {nodes_output}
 
 -----
 
-## format example
+## 出力フォーマット
 [{tag}]
 {{
-    "key1": "comment1",
-    "key2": "comment2",
-    "keyn": "commentn"
+    "要件１": "コメント１",
+    "要件２": "コメント２",
+    "要件３": "コメント３"
 }}
 [/{tag}]
 
 ## nodes: "<node>: <type>  # <instruction>"
-- key1: <class \'str\'> # the first key name of mismatch key
-- key2: <class \'str\'> # the second key name of mismatch key
-- keyn: <class \'str\'> # the last key name of mismatch key
+- 要件: <class \'str\'> # 最初の合わなかった要件
+- 要件: <class \'str\'> 
+- 要件: <class \'str\'> 
 
-## constraint
+## 制約
 {constraint}
 
-## action
+## アクション
 Follow format example's {prompt_schema} format, generate output and make sure it follows the format example.
 """
 
@@ -109,7 +110,9 @@ change the nodes_output key's value to meet its comment and no need to add extra
 {constraint}
 
 ## action
-Follow format example's {prompt_schema} format, generate output and make sure it follows the format example.
+
+出力がフォーマットに沿っているか確認してください。
+フォーマットの{prompt_schema}に合わせて出力してください。
 """
 
 
