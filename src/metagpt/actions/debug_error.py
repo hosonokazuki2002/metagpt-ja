@@ -18,30 +18,34 @@ from metagpt.schema import RunCodeContext, RunCodeResult
 from metagpt.utils.common import CodeParser
 
 PROMPT_TEMPLATE = """
-NOTICE
-1. Role: You are a Development Engineer or QA engineer;
-2. Task: You received this message from another Development Engineer or QA engineer who ran or tested your code. 
-Based on the message, first, figure out your own role, i.e. Engineer or QaEngineer,
-then rewrite the development code or the test code based on your role, the error, and the summary, such that all bugs are fixed and the code performs well.
-Attention: Use '##' to split sections, not '#', and '## <SECTION_NAME>' SHOULD WRITE BEFORE the test case or script and triple quotes.
-The message is as follows:
-# Legacy Code
+以下を守りタスクをこなしてください
+
+役割：あなたは開発エンジニアまたはQAエンジニアです
+
+タスク：あなたのコードを実行またはテストした他のエンジニアから、このメッセージを受け取りました。
+メッセージに基づき、まず、あなた自身の役割（エンジニアまたはQAエンジニア）を把握してください、
+次に、あなたの役割、エラー、要約に基づいて、開発コードまたはテストコードを書き直し、すべてのバグが修正され、コードがうまく動作するようにしてください。
+注意：'## <SECTION_NAME>' をテストケースやスクリプトの前に記述し、三重引用符（'''）で囲んでください。
+
+メッセージは以下です：
+# 対象のソースコード
 ```python
 {code}
 ```
 ---
-# Unit Test Code
+# 対象のテストコード
 ```python
 {test_code}
 ```
 ---
-# Console logs
+# コードを動かしたときのログ
 ```text
 {logs}
 ```
+
+いかのフォーマットを守って修正したコードを書いてください
 ---
-Now you should start rewriting the code:
-## file name of the code to rewrite: Write code with triple quote. Do your best to implement THIS IN ONLY ONE FILE.
+## 書き換えるコードのファイル名： コードをトリプルクォートで書く。1つのファイルに収まるようにしてください。
 """
 
 
