@@ -23,5 +23,6 @@ matagpt：https://github.com/geekan/MetaGPT?tab=readme-ov-file#contact-informati
 - action_node.py
 - action_outcls_registry.py
 - action_output.py
+- debug_error.py
 
 </details>
