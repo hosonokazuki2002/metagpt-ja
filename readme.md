@@ -15,10 +15,13 @@ matagpt：https://github.com/geekan/MetaGPT?tab=readme-ov-file#contact-informati
     - 変更後のプロンプトを載せる
 
 ローカルLLMの利用方法によっては日本語化しきらない場合のほうが良いこともあるので元のpromptも残す。
-<details open><summary>src/metagpt/actions</summary>
+<details close><summary>src/metagpt/actions</summary>
 
 
 - init.py
 - action_graph.py
+- action_node.py
+- action_outcls_registry.py
+- action_output.py
 
 </details>
